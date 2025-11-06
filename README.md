@@ -1,8 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Wallet Manager
+
+An AI-powered wallet management application built with Next.js and thirdweb AI API.
+
+## Features
+
+- 💬 Chat interface for interacting with your wallet using natural language
+- 🤖 Powered by thirdweb AI API for Web3 operations
+- 📱 Modern, responsive UI built with Tailwind CSS
+- ⚡ Real-time streaming responses
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ installed
+- A thirdweb account and client ID
+
+### Setup
+
+1. Clone the repository and install dependencies:
+
+```bash
+npm install
+```
+
+2. Create a `.env.local` file in the root directory and add your thirdweb client ID:
+
+```bash
+THIRDWEB_CLIENT_ID=your_client_id_here
+```
+
+You can get your client ID from the [thirdweb dashboard](https://thirdweb.com/dashboard).
+
+3. Run the development server:
 
 ```bash
 npm run dev
@@ -14,11 +44,24 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the chat interface.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Simply type your questions or commands in the chat interface. The AI assistant can help you with:
+- Wallet operations
+- Transaction queries
+- Token swaps
+- Smart contract interactions
+- And more Web3 operations
+
+## Tech Stack
+
+- **Next.js 15** - React framework
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **thirdweb AI API** - AI-powered Web3 interactions
+- **Lucide React** - Icons
 
 ## Learn More
 
