@@ -1,26 +1,29 @@
-import { NextRequest } from 'next/server';
+import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const { messages, context, session_id } = body;
 
-    // Get client ID from environment variable or header
-    const clientId = process.env.THIRDWEB_CLIENT_ID || request.headers.get('x-client-id');
-    
-    if (!clientId) {
+    // Get secret key from environment variable (backend usage)
+    const secretKey = process.env.THIRDWEB_SECRET_KEY;
+
+    if (!secretKey) {
       return new Response(
-        JSON.stringify({ error: 'Thirdweb client ID is required. Set THIRDWEB_CLIENT_ID environment variable.' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
+        JSON.stringify({
+          error:
+            "Thirdweb secret key is required. Set THIRDWEB_SECRET_KEY environment variable.",
+        }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
 
     // Prepare request to thirdweb API
-    const thirdwebResponse = await fetch('https://api.thirdweb.com/ai/chat', {
-      method: 'POST',
+    const thirdwebResponse = await fetch("https://api.thirdweb.com/ai/chat", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'x-client-id': clientId,
+        "Content-Type": "application/json",
+        "x-secret-key": secretKey,
       },
       body: JSON.stringify({
         messages,
@@ -34,7 +37,10 @@ export async function POST(request: NextRequest) {
       const errorText = await thirdwebResponse.text();
       return new Response(
         JSON.stringify({ error: `Thirdweb API error: ${errorText}` }),
-        { status: thirdwebResponse.status, headers: { 'Content-Type': 'application/json' } }
+        {
+          status: thirdwebResponse.status,
+          headers: { "Content-Type": "application/json" },
+        }
       );
     }
 
@@ -52,7 +58,7 @@ export async function POST(request: NextRequest) {
         try {
           while (true) {
             const { done, value } = await reader.read();
-            
+
             if (done) {
               controller.close();
               break;
@@ -70,17 +76,16 @@ export async function POST(request: NextRequest) {
 
     return new Response(stream, {
       headers: {
-        'Content-Type': 'text/event-stream',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
       },
     });
   } catch (error) {
-    console.error('Chat API error:', error);
-    return new Response(
-      JSON.stringify({ error: 'Internal server error' }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
+    console.error("Chat API error:", error);
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }
-

@@ -24,13 +24,13 @@ An AI-powered wallet management application built with Next.js and thirdweb AI A
 npm install
 ```
 
-2. Create a `.env.local` file in the root directory and add your thirdweb client ID:
+2. Create a `.env.local` file in the root directory and add your thirdweb secret key:
 
 ```bash
-THIRDWEB_CLIENT_ID=your_client_id_here
+THIRDWEB_SECRET_KEY=your_secret_key_here
 ```
 
-You can get your client ID from the [thirdweb dashboard](https://thirdweb.com/dashboard).
+You can get your secret key from the [thirdweb dashboard](https://thirdweb.com/dashboard). Use the secret key (not client ID) since this is a backend API route.
 
 3. Run the development server:
 
