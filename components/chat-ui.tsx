@@ -138,10 +138,10 @@ export default function ChatUI() {
               }
 
               // Handle init event (get session_id)
+              // According to docs: data object contains session_id, chain_ids, networks, wallet_address
               if (eventType === "init") {
-                const sessionIdValue = data.session_id || data.data?.session_id;
-                if (sessionIdValue) {
-                  setSessionId(sessionIdValue);
+                if (data.session_id) {
+                  setSessionId(data.session_id);
                 }
               }
 
